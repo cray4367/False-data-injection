@@ -174,10 +174,11 @@ def train_and_evaluate(train_path, test_path):
     return model, scaler
 
 
+
 def gradio_interface(model, scaler):
-    def predict(input_str):
+    def predict(input_value):
         try:
-            features = np.array([list(map(float, input_str.split(',')))])
+            features = np.array([list(map(float, input_value.split(',')))])
             features_scaled = scaler.transform(features)
             prediction = model.predict(features_scaled).flatten()[0]
             conformity = max(prediction, 1 - prediction)
